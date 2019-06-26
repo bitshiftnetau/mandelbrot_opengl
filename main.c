@@ -12,12 +12,20 @@
 
 #define VAL 255
 
+
+
+typedef struct {
+  double x;
+  double y;
+}coords;
+
 typedef struct {
   uint8_t r; 
   uint8_t g;
   uint8_t b;
 }rgb_t;
 
+coords screen;
 rgb_t **tex_array = 0;
 rgb_t *image;
 int gwin;
@@ -51,12 +59,17 @@ void mouseclick(int button, int state, int x, int y);
 void resize(int w, int h);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void window_size_callback(GLFWwindow* window, int w, int h);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 
 int main(int c, char **v)
 {
-  
+   
   GLFWwindow* win = init_glfw();
   glfwSetWindowPos(win, 1000, 500);
+
+  glfwSetMouseButtonCallback(window, mouse_button_callback);
+  glfwSetCursorPosCallback(window, cursor_position_callback);
 
   //printf("keys:\n\tr: color rotation\n\tc: monochrome\n\ts: screen dump\n\t"
   //		"<, >: decrease/increase max iteration\n\tq: quit\n\tmouse buttons to zoom\n");
@@ -105,8 +118,6 @@ void set_texture(GLuint tex)
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex_w, tex_h,
-	//	0, GL_RGB, GL_UNSIGNED_BYTE, tex_array[0]);
  
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex_w, tex_h,
 		0, GL_RGB, GL_UNSIGNED_BYTE, tex_array[0]);
@@ -178,7 +189,7 @@ GLFWwindow* init_glfw()
      //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
      //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
      glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
-     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+     glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
      
 
     //the fourth parameter of glfwCreateWindow should be NULL for windowed mode and 
@@ -314,15 +325,46 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and 
     // height will be significantly larger than specified on retina displays.
+	  printf("resize %d %d\n", width, height);
     glViewport(0, 0, width, height);
   	glOrtho(0, width, 0, height, -1, 1);
-    //set_texture(texture);
+    set_texture(texture);
+    
 }
 
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
 
+  double x = screen.x;
+  double y = screen.y;
 
+	switch(button) {
+	case GLFW_MOUSE_BUTTON_LEFT: // zoom in
+    printf("zoom: in\n"); 
+		if (scale > fabs(x) * 1e-16 && scale > fabs(y) * 1e-16)
+			scale /= 4;
+		break;
+	case GLFW_MOUSE_BUTTON_RIGHT: // zoom out 
+    printf("zoom: out\n"); 
+    scale *= 4;
+		break;
+	// any other button recenters 
+	}
+	set_texture(texture);
+}
+ 
+static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	cx += (xpos - width / 2) * scale;
+	cy -= (ypos - height/ 2) * scale;
+  
+  screen.x = xpos;
+  screen.y = ypos;
 
+  printf("cursor xpos: %2f\n", xpos);
+  printf("cursor ypos: %2f\n", ypos);
 
+}
 
 
 
@@ -377,26 +419,4 @@ void keypress(unsigned char key, int x, int y)
 }
 */
 
-/*
-void mouseclick(int button, int state, int x, int y)
-{
-	if (state != GLUT_UP) return;
- 
-	cx += (x - width / 2) * scale;
-	cy -= (y - height/ 2) * scale;
- 
-	switch(button) {
-	case GLUT_LEFT_BUTTON: // zoom in 
-		if (scale > fabs(x) * 1e-16 && scale > fabs(y) * 1e-16)
-			scale /= 2;
-		break;
-	case GLUT_RIGHT_BUTTON: // zoom out 
-		scale *= 2;
-		break;
-	// any other button recenters 
-	}
-	set_texture();
-}
-*/
- 
 

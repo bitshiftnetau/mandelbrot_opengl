@@ -8,17 +8,20 @@
 GLEW_STATIC	main.c	/^#define  GLEW_STATIC$/;"	d	file:
 VAL	main.c	/^#define VAL /;"	d	file:
 __anon0d38083b0108	main.c	/^typedef struct {$/;"	s	file:
+__anon0d38083b0208	main.c	/^typedef struct {$/;"	s	file:
 alloc_texture	main.c	/^void alloc_texture()$/;"	f	typeref:typename:void
-b	main.c	/^  uint8_t b;$/;"	m	struct:__anon0d38083b0108	typeref:typename:uint8_t	file:
+b	main.c	/^  uint8_t b;$/;"	m	struct:__anon0d38083b0208	typeref:typename:uint8_t	file:
 calc_mandel	main.c	/^void calc_mandel(rgb_t* px)$/;"	f	typeref:typename:void
 color_rotate	main.c	/^int color_rotate = 0;$/;"	v	typeref:typename:int
 conversion_iterator_x	main.c	/^int conversion_iterator_x = 0;$/;"	v	typeref:typename:int
 conversion_iterator_y	main.c	/^int conversion_iterator_y = 0;$/;"	v	typeref:typename:int
+coords	main.c	/^}coords;$/;"	t	typeref:struct:__anon0d38083b0108	file:
+cursor_position_callback	main.c	/^static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)$/;"	f	typeref:typename:void	file:
 cx	main.c	/^double cx = -.6, cy = 0;$/;"	v	typeref:typename:double
 cy	main.c	/^double cx = -.6, cy = 0;$/;"	v	typeref:typename:double
 dump	main.c	/^int dump = 1;$/;"	v	typeref:typename:int
 framebuffer_size_callback	main.c	/^void framebuffer_size_callback(GLFWwindow* window, int width, int height)$/;"	f	typeref:typename:void
-g	main.c	/^  uint8_t g;$/;"	m	struct:__anon0d38083b0108	typeref:typename:uint8_t	file:
+g	main.c	/^  uint8_t g;$/;"	m	struct:__anon0d38083b0208	typeref:typename:uint8_t	file:
 global_iterator	main.c	/^int global_iterator = 0;$/;"	v	typeref:typename:int
 gwin	main.c	/^int gwin;$/;"	v	typeref:typename:int
 height	main.c	/^int height = 480;$/;"	v	typeref:typename:int
@@ -28,11 +31,13 @@ init_glfw	main.c	/^GLFWwindow* init_glfw()$/;"	f	typeref:typename:GLFWwindow *
 invert	main.c	/^int invert = 0;$/;"	v	typeref:typename:int
 main	main.c	/^int main(int c, char **v)$/;"	f	typeref:typename:int
 max_iter	main.c	/^int max_iter = 256;$/;"	v	typeref:typename:int
-r	main.c	/^  uint8_t r; $/;"	m	struct:__anon0d38083b0108	typeref:typename:uint8_t	file:
+mouse_button_callback	main.c	/^void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)$/;"	f	typeref:typename:void
+r	main.c	/^  uint8_t r; $/;"	m	struct:__anon0d38083b0208	typeref:typename:uint8_t	file:
 render	main.c	/^void render(GLuint tex)$/;"	f	typeref:typename:void
-rgb_t	main.c	/^}rgb_t;$/;"	t	typeref:struct:__anon0d38083b0108	file:
+rgb_t	main.c	/^}rgb_t;$/;"	t	typeref:struct:__anon0d38083b0208	file:
 saturation	main.c	/^int saturation = 1;$/;"	v	typeref:typename:int
 scale	main.c	/^double scale = 1.\/256;$/;"	v	typeref:typename:double
+screen	main.c	/^coords screen;$/;"	v	typeref:typename:coords
 set_texture	main.c	/^void set_texture(GLuint tex)$/;"	f	typeref:typename:void
 tex_array	main.c	/^rgb_t **tex_array = 0;$/;"	v	typeref:typename:rgb_t **
 tex_h	main.c	/^int tex_w, tex_h;$/;"	v	typeref:typename:int
@@ -41,3 +46,5 @@ texture	main.c	/^GLuint texture;$/;"	v	typeref:typename:GLuint
 width	main.c	/^int width = 640;$/;"	v	typeref:typename:int
 window	main.c	/^GLFWwindow* window;$/;"	v	typeref:typename:GLFWwindow *
 window_size_callback	main.c	/^void window_size_callback(GLFWwindow* window, int w, int h)$/;"	f	typeref:typename:void
+x	main.c	/^  double x;$/;"	m	struct:__anon0d38083b0108	typeref:typename:double	file:
+y	main.c	/^  double y;$/;"	m	struct:__anon0d38083b0108	typeref:typename:double	file:
